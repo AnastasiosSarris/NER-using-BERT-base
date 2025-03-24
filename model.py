@@ -123,7 +123,7 @@ def evaluate(model, val_dataloader, device, ids_to_labels, epoch_num):
 
             if validating_steps % 100 == 0:
                 print(
-                    f"Validation loss pres 100 training steps:{validating_loss/validating_steps}"
+                    f"Validation loss pres 100 validation steps:{validating_loss/validating_steps}"
                 )
 
             # Flatten the labels and the predictions

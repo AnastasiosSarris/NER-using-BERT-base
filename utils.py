@@ -6,6 +6,7 @@ from sklearn.metrics import (
     recall_score,
     confusion_matrix,
 )
+import seaborn as sns
 
 ENTITIES_LABELS = [
     "B-per",
@@ -89,7 +90,7 @@ def print_metrics(labels, preds):
     preds: The predicted labels
 
     """
-    confusion_matrix = confusion_matrix(labels, preds)
+    confusionmatrix = confusion_matrix(labels, preds)
     accuracy = accuracy_score(labels, preds)
     precision = precision_score(labels, preds, average="macro")
     recall = recall_score(labels, preds, average="macro")
@@ -98,3 +99,17 @@ def print_metrics(labels, preds):
     print(f"Precision score: {np.round(precision,2)}")
     print(f"Recall score: {np.round(recall,2)}")
     print(f"F1 score: {np.round(f1_score,2)}")
+    plot_confusion_matrix(confusionmatrix)
+
+
+def plot_confusion_matrix(confusionmatrix):
+    """
+    Function that plots the confusion matrix
+    Parameters:
+        confusion_matrix (np.array): The confusion matrix
+    """
+    sns.set_theme(rc={"figure.figsize": (11.7, 8.27)})
+    axis = sns.heatmap(confusionmatrix, annot=True, cmap="Blues")
+    axis.set_title("Confusion matrix for the test set")
+    axis.set_xlabel("Predicted labels")
+    axis.set_ylabel("Actual labels")
